@@ -1,0 +1,29 @@
+repeat task.wait() until game:IsLoaded()
+task.wait(.5)
+_G.pr = nil
+getgenv().prompt = function(t,b,bt1,bt2)
+_G.pr = nil
+local pb = game:GetService("CoreGui").RobloxGui.PopupFrame
+pb.Visible = true
+pb.PopupText.Text = t
+pb.PopupText.Position = UDim2.new(0,8,0,-8)
+local pt2 = pb.PopupText:Clone()
+pt2.Parent = pb
+pt2.TextSize = 24
+pt2.Position = UDim2.new(0,8,0,30)
+pt2.Text = b
+pb.PopupAcceptButton.Text = bt1
+pb.PopupDeclineButton.Text = bt2
+local db = pb.PopupDeclineButton
+local ab = pb.PopupAcceptButton
+db.MouseButton1Click:Connect(function(click)
+pb.Visible = false
+pt2:Destroy()
+_G.pr = false
+end)
+ab.MouseButton1Click:Connect(function(click)
+pb.Visible = false
+pt2:Destroy()
+_G.pr = true
+end)
+end
